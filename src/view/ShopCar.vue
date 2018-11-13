@@ -1,31 +1,43 @@
 <template>
-<div id="shopCar">
-  <ul class="title">
-    <li>商品
-      <ul class="row">
-        <li v-for="(item , index) in list" :key="index">{{item.fruits}}</li>
-      </ul>
-    </li>
-    <li>数量(个)
-      <ul>
-        <li v-for="(item , index) in list" :key="index" @click="shop(index)">
-          <span @click="decrement">-</span>
-          <span>{{count}}</span>
-          <span @click="increment">+</span>
-        </li>
-      </ul>
-    </li>
-    <li>单价(元)
-      <ul>
-        <li>{{single}}</li>
-      </ul>
-    </li>
-    <li>总计
-      <ul>
-        <li>{{totalCount}}</li>
-      </ul>
-    </li>
-  </ul>
+<div id="shopCar" v-cloak>
+  <template v-if="list.length">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>商品名称</th>
+        <th>商品单价</th>
+        <th>购买数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for='(item,index) in list' :key="index">
+        <td>
+          {{index+1}}
+        </td>
+        <td>
+          {{item.name}}
+        </td>
+        <td>
+          {{item.price}}
+        </td>
+        <td>
+          <button @click="decrement(index)" :disabled="item.count === 1">-</button>
+          {{item.count}}
+          <button @click="increment(index)">+</button>
+        </td>
+        <td>
+          <button @click="handleRemove(index)">移除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div>总价：¥{{totalPrice}}</div>
+  </template>
+  <div v-else>
+    购物车为空
+  </div>
 </div>
 </template>
 <script>
@@ -39,31 +51,52 @@ export default {
       single: 5,
       index: '',
       //  数据
-      list: [{id: 1, fruits: '苹果'}
+      list: [{
+        id: 1,
+        name: '冰箱',
+        price: 6108,
+        count: 1
+      },
+      {
+        id: 2,
+        name: '彩电',
+        price: 4888,
+        count: 1
+      },
+      {
+        id: 3,
+        name: '洗碗机',
+        price: 7898,
+        count: 1
+      }
       ]
     }
   },
-  computed: {
-    totalCount () {
-      return this.count * this.single
-    }
-  },
   methods: {
-    shop (index) {
-      this.index = index
-    },
-    //  -
-    decrement () {
-      if (this.count === 1) {
-        alert('不能再少了哦')
-        this.count = 1
+    decrement (index) {
+      if (this.list[index].count === 1) {
+        return false
       } else {
-        this.count--
+        this.list[index].count--
       }
     },
-    //  +
-    increment () {
-      this.count++
+    increment (index) {
+      this.list[index].count++
+    },
+    handleRemove (index) {
+      this.list.splice(index, 1)
+    }
+  },
+  computed: {
+    totalPrice () {
+      //  对total进行处理后再返回新的total
+      var total = 0
+      for (var i = 0, len = this.list.length; i < len; i++) {
+        total += this.list[i].price * this.list[i].count
+      }
+      //  每隔三位加一个逗号
+      return total
+      //  return total.toString().replace(/\B(?=(\d{3})+$)/g, ',')
     }
   }
 }
@@ -71,42 +104,25 @@ export default {
 <style lang="less" scoped>
   @import "../assets/reset";
   #shopCar{
-    .title{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 30px;
-      &>li{
-        width: 100%;
-        height: 30px;
-        flex: 1;
-        border: solid 1px #c5c5c5;
-        line-height: 30px;
-        &>ul{
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          >li{
-            margin-top: 10px;
-            width: 100%;
-            height: 30px;
-            border: solid 1px #c5c5c5;
-            flex: 1;
-            line-height: 30px;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            >span{
-              flex: 1;
-              display: inline-block;
-            }
-          }
-        }
-      }
+    &[v-cloak]{
+      display: none;
+    }
+    table{
+      border: 1px solid #e9e9e9;
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+    }
+    th,td{
+      padding: 8px 16px;
+      border: 1px solid #e9e9e9;
+      text-align: left;
+    }
+    th{
+      background: #f7f7f7;
+      color: #5c6b77;
+      font-weight: 600;
+      white-space: nowrap;
     }
   }
 </style>
