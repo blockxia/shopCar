@@ -19,14 +19,17 @@ export default {
   },
   methods: {
     goDetail (id) {
-      if (id === 0) {
-        this.$router.push('/select')
-      } else if (id === 1) {
-        this.$router.push('/shopCar')
-      } else if (id === 2) {
-        this.$router.push('/clock')
-      } else if (id === 3) {
-        this.$router.push('/culc')
+      switch (id) {
+        case 0 :
+          return this.$router.push('/select')
+        case 1 :
+          return this.$router.push('/shopCar')
+        case 2 :
+          return this.$router.push('/clock')
+        case 3 :
+          return this.$router.push('/culc')
+        default :
+          return this.$router.push('/select')
       }
     }
   }
