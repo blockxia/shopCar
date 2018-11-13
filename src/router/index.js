@@ -5,6 +5,8 @@ import Router from 'vue-router'
 const Msite = () => import('@/view/Msite')
 const List = () => import('@/view/List')
 const shopCar = () => import('@/view/shopCar')
+const Select = () => import('@/view/Select')
+const Index = () => import('@/view/index')
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +17,11 @@ export default new Router({
       component: Msite
     },
     {
+      path: '/index',
+      name: 'index',
+      component: Index
+    },
+    {
       path: '/list',
       name: 'list',
       component: List
@@ -23,6 +30,11 @@ export default new Router({
       path: '/shopCar',
       name: 'shopCar',
       component: shopCar
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: Select
     }
   ]
 })

@@ -1,5 +1,6 @@
 <template>
 <div id="shopCar" v-cloak>
+  <Triangle/>
   <template v-if="list.length">
     <table>
       <thead>
@@ -41,6 +42,7 @@
 </div>
 </template>
 <script>
+import Triangle from '../components/triangle.vue'
 export default {
   name: 'shopCar',
   data  () {
@@ -98,6 +100,9 @@ export default {
       return total
       //  return total.toString().replace(/\B(?=(\d{3})+$)/g, ',')
     }
+  },
+  components: {
+    Triangle
   }
 }
 </script>
