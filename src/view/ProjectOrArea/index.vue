@@ -1,10 +1,12 @@
 <template>
   <div id="pro_area">
-    <ul class="wrap">
-      <li>iii</li>
-      <li>yyy</li>
-      <li>uuu</li>
-    </ul>
+    <div class="list">
+      <ul class="wrap">
+        <li>iii</li>
+        <li>yyy</li>
+        <li>uuu</li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -12,15 +14,17 @@ import BScroll from 'better-scroll'
 export default {
   data () {
     return {
-      active: 0
+      active: 0,
+      navsScroll: ''
     }
   },
   created () {
     this.$nextTick(() => {
-      let bs = new BScroll('.wrap', {
+      this.navsScroll = new BScroll('#pro_area', {
+        probeType: 2,
         scrollX: true,
         click: true,
-        probeType: 2
+        eventPassthrough: 'vertical'
       })
     })
   },
@@ -38,16 +42,21 @@ export default {
 </script>
 
 <style lang='less'>
-  @import '../../assets/common';
+  @import '../../assets/reset';
   #pro_area{
     width: 100%;
     height: 220px;
-    .wrap{
-      margin-top: 20px;
-      width: 300%;
-      height: 100%;
-      li{
+    overflow: hidden;
+    .list{
+      .wrap{
         width: 100%;
+        height: 100%;
+        li{
+          float: left;
+          background: #ccc;
+          width: 300%;
+          height: 100%;
+        }
       }
     }
     /*.van-tabs__line{

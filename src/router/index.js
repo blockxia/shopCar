@@ -7,6 +7,7 @@ const List = () => import('@/view/List')
 const shopCar = () => import('@/view/shopCar')
 const Select = () => import('@/view/Select')
 const Index = () => import('@/view/index')
+const ProjectOrArea = () => import('@/view/ProjectOrArea')
 Vue.use(Router)
 
 export default new Router({
@@ -35,6 +36,10 @@ export default new Router({
       path: '/select',
       name: 'select',
       component: Select
+    },
+    {
+      path: '/projectOrArea',
+      component: ProjectOrArea
     }
   ]
 })

@@ -68,7 +68,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  @import '../../assets/common';
+  @import '../../assets/reset';
 #project_record{
   margin-top: 60px;
   .padding-box(0 32px / 2);
