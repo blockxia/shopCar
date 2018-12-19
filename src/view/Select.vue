@@ -11,11 +11,16 @@
     <input type="checkbox" @click="selectAll" :checked="checked"/>
     全选
   </label>
+  <br/>
+  <span v-for="item in 88888" :key="item" >....{{item }}<br/></span>
   </p>
+  <!--回顶部组件-->
+  <GoTop/>
 </div>
 </template>
 <script>
 import Triangle from '../components/triangle.vue'
+import GoTop from '../components/GoTop.vue'
 export default {
   name: 'select',
   data () {
@@ -60,7 +65,8 @@ export default {
     }
   },
   components: {
-    Triangle
+    Triangle,
+    GoTop
   }
 }
 </script>
