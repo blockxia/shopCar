@@ -1,6 +1,7 @@
 <template>
   <div class='commodity'>
     <div class='container'>
+      <span @click="$router.push('/login')">登录/注册</span>
       <swiper class='swiImgs' :options='swiperOption' v-if='commodity.length!=0'>
         <swiper-slide v-for='(item, index) in commodity'  :key='index' class='item'>
           <img class='swiImg' :src='item'/>
@@ -24,15 +25,10 @@ export default {
   data () {
     return {
       commodity: [
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/2_1536049430.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/2_1536049430.jpg'
+        '/static/img/u1359_state0.jpg',
+        '/static/img/u1359_state1.jpg'
       ],
-      detailimages: ['https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg',
-        'https://boweisou.oss-cn-shenzhen.aliyuncs.com/yy/images/911a7002e11608fb581fffcde05d5257.jpg'],
+      detailimages: [''],
       imgIndex: 1,
       swiperOption: {
         //  是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
@@ -94,7 +90,11 @@ export default {
           background-size: 100%;
         }
         .swiper-pagination{
-         &> .swiper-pagination-bullet-active{
+          .swiper-pagination-bullet{
+            opacity: 1;
+            background: #fff;
+          }
+         .swiper-pagination-bullet-active{
            opacity: 1;
            background: red;
          }
