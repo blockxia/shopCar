@@ -8,6 +8,7 @@ const shopCar = () => import('@/view/shopCar')
 const Select = () => import('@/view/Select')
 const Index = () => import('@/view/index')
 const ProjectOrArea = () => import('@/view/ProjectOrArea')
+const slideShow = () => import('@/view/slideShow')
 Vue.use(Router)
 
 export default new Router({
@@ -23,13 +24,16 @@ export default new Router({
       component: Index
     },
     {
+      path: '/slideShow',
+      component: slideShow
+    },
+    {
       path: '/list',
       name: 'list',
       component: List
     },
     {
       path: '/shopCar',
-      name: 'shopCar',
       component: shopCar
     },
     {

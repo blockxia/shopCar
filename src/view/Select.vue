@@ -22,7 +22,6 @@
 import Triangle from '../components/triangle.vue'
 import GoTop from '../components/GoTop.vue'
 export default {
-  name: 'select',
   data () {
     return {
       proData: [
