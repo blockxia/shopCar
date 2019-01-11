@@ -10,6 +10,7 @@ const Index = () => import('@/view/index')
 const ProjectOrArea = () => import('@/view/ProjectOrArea')
 const slideShow = () => import('@/view/slideShow')
 const login = () => import('@/view/login')
+const demo = () => import('@/view/demo')
 Vue.use(Router)
 
 export default new Router({
@@ -36,6 +37,10 @@ export default new Router({
     {
       path: '/shopCar',
       component: shopCar
+    },
+    {
+      path: '/demo',
+      component: demo
     },
     {
       path: '/login',
