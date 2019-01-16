@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import NProgress from 'nprogress' // 进度条
+import 'nprogress/nprogress.css' // 进度条样式
 //  import HelloWorld from '@/components/HelloWorld'
 //  const HelloWorld = () => import('@/components/HelloWorld')
 const Msite = () => import('@/view/Msite')
@@ -10,10 +12,10 @@ const Index = () => import('@/view/index')
 const ProjectOrArea = () => import('@/view/ProjectOrArea')
 const slideShow = () => import('@/view/slideShow')
 const login = () => import('@/view/login')
-const demo = () => import('@/view/demo')
+const particles = () => import('@/view/particles')
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -39,8 +41,8 @@ export default new Router({
       component: shopCar
     },
     {
-      path: '/demo',
-      component: demo
+      path: '/particles',
+      component: particles
     },
     {
       path: '/login',
@@ -57,3 +59,38 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  //  if (getToken()) {
+  if (to.path === '/login') {
+    next({
+      path: '/'
+    })
+    NProgress.done()
+  } else { // 实时拉取用户的信息
+    next()
+    /*  store.dispatch('GetUserInfo').then(res => {
+
+      }).catch(err => {
+        store.dispatch('FedLogOut').then(() => {
+          Message.error('拉取用户信息失败，请重新登录！' + err)
+          next({
+            path: '/'
+          })
+        })
+      }) */
+  }
+  // } else {
+  /* if (whiteList.includes(to.path)) {
+    next()
+  } else {
+    next('/login')
+    NProgress.done()
+  } */
+})
+router.afterEach(() => {
+  NProgress.done() // 结束Progress
+})
+
+export default router
