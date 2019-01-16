@@ -14,7 +14,7 @@ const slideShow = () => import('@/view/slideShow')
 const login = () => import('@/view/login')
 const particles = () => import('@/view/particles')
 Vue.use(Router)
-
+const whiteList = ['/login'] // 不重定向白名单
 const router = new Router({
   routes: [
     {
